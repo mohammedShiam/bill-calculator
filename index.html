@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Application</title>
+    <style>
+        body {
+            background-color: rgb(89, 218, 250);
+            text-align:center;
+
+        }
+
+        .container {
+            width: 70%;
+            max-width: 40em;
+            min-height: 23em;
+            box-shadow: 1px 1px 5px rgb(44, 44, 44);
+            margin: 0 auto;
+            margin-top: 3em;
+            text-align: center;
+            
+        }
+
+        .p {
+            padding: 2em;
+            text-align:left;
+        }
+        
+       /* Content - Table */
+        tr,
+        th,
+        td {
+            border-bottom: 1px solid rgb(35, 82, 114);
+            
+            margin: .5em;
+        }
+       td{
+           border-right: 1px solid rgb(19, 19, 19);
+           border-left: 1px solid rgb(8, 8, 8);
+       }
+
+       /*Footer*/
+        footer {
+	        text-align: center;
+	        margin-top: 2rem;
+	        background: #f1eeee;
+	        padding: .5rem 0;
+	        font-size: 14px;
+        }
+
+        /* Custom CSS */
+        .form-group{
+            display: inline-block;
+
+        }
+        .form-control{
+            display: block;
+            padding: .5em;
+            margin-top:.5em;
+        }
+        .form-label{
+            font-size: 1.2em;
+        }
+        .btn {
+	        padding: .4em 1.5rem;
+	        font-size: 1em;
+	        cursor: pointer;
+	        border: none;
+	        outline: none;
+	        border-radius: 22.5px;
+	        font-family: Arial, Helvetica, sans-serif;
+	        font-weight: 500;
+	        margin: 1.4em .5em;
+        }
+        .btn:hover{
+            background:white;
+            color:black;
+            transition:.5s ease-in;
+        }
+        .btn:focus{
+            outline: none;
+        }
+        .btn:active{
+            opacity: .5;
+        }
+        .btn-primary{
+            background-color: rgb(24, 105, 255);
+            color:aliceblue;
+        }
+        .btn-life{
+            background-color: rgb(19, 133, 19);
+            color:aliceblue;
+        }
+        .btn-danger {
+	    background: red;
+	    color: #f4f4f4;
+        }
+        .d-flex{
+            display: flex;
+        }
+        .color-light{
+            color: #fff;
+
+        }
+        .head{
+            background-color: brown;
+            border-bottom-left-radius: 20%;
+            padding: .5em 0;
+            font-size:33px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="color-light head">Bills Calculator</header>
+    <div class="container p">
+        <form action="" id="form">
+            <div class="form-group">
+                <label for="product" class="form-label">Product Name</label>
+                <input class="form-control" id="product" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="range" class="form-label">Range</label>
+                <input class="form-control" id="range" type="number">
+            </div>
+            
+            <p id="alert"></p>
+            
+             <button type="submit" class="btn btn-primary" id="btn">Calculate</button>
+            <button type="reset" class="btn btn-life">Add New</button>
+            <button id="new" class="btn btn-danger" >Reload</button>
+        </form>
+        <br>
+        <br>
+        <hr>
+       <div class="showcase d-flex" >
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Range (Tk)</th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                </tbody>
+
+            </table>
+            <div  class="p" >
+                <h3>Quantity: <span id="product-quantity"></span></h3>
+                <h3>In total: <span id="mony"></span></h3>
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; All Rights Reserved Mohammed Shiam
+    </footer>
+
+
+    <!-- Script -->
+    <script>
+        const product = document.getElementById('product')
+        const range = document.getElementById('range')
+        const alert = document.getElementById('alert')
+        const btn = document.getElementById('btn')
+        const reload = document.getElementById('new')
+        const intotal = document.getElementById('mony')
+        const tbody = document.getElementById('table')
+        const productQuantity = document.getElementById('product-quantity')
+        let sum = 0;
+        
+        // Reload Page
+        reload.addEventListener('click', ()=>{
+            location.reload();
+        })
+        
+        //Quatity Display
+      
+        
+        // Main Code
+        let quantity = 0;
+        btn.addEventListener('click', (e)=>{
+            e.preventDefault();
+           
+            if(product.value == '' || range.value == ''){
+                alert.innerHTML = 'Invalid Creadential!';
+                alert.style.color = 'red';
+            }else{
+                quantity++
+                // Creat Elements
+                const tr = document.createElement('tr');
+                const td1 = document.createElement('td')
+                const td2 = document.createElement('td')
+
+                // Append Elements
+                tbody.appendChild(tr);
+                tr.appendChild(td1)
+                tr.appendChild(td2)
+
+                // Display Output
+                td1.innerText = product.value;
+                td2.innerText = range.value;
+
+                intotal.innerText = `${sum+=Number(range.value)}`
+                intotal.style.color = '#fff'
+                //console.log(quantity)
+            }
+            productQuantity.innerText = quantity
+            productQuantity.style.color = '#fff'
+
+            
+        })
+
+    
+    </script>
+</body>
+
+</html>
+
